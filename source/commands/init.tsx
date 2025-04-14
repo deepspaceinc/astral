@@ -14,6 +14,36 @@ import pyInit from '../utils/py-init.js';
 //     options: zod.infer<typeof options>;
 // };
 
+type LanguageIdentifiers = {
+    [key: string]: {
+        identifiers: string[];
+        init: (setUpdates: (message: string) => void) => void;
+    };
+};
+
+const checkLanguage = (files: string[], setUpdates: (message: string) => void) => {
+    const languageIdentifiers: LanguageIdentifiers = {
+        javascript: {
+            identifiers: ['package.json'],
+            init: jsInit,
+        },
+        python: {
+            identifiers: ['requirements.txt'],
+            init: pyInit,
+        },
+    };
+
+    Object.keys(languageIdentifiers).forEach(lang => {
+        const langFound = files.some(file => {
+            return languageIdentifiers[lang]?.identifiers.includes(file);
+        });
+
+        if (langFound) {
+            languageIdentifiers[lang]?.init((message: string) => setUpdates(message));
+        }
+    });
+}
+
 // {options}: Props
 export default function Index() {
 	const [updates, setUpdates] = useState('');
@@ -21,25 +51,7 @@ export default function Index() {
 	// Run only once on load.
 	useEffect(() => {
 		const files = fs.readdirSync('./');
-		const languageIdentifiers = {
-			javascript: ['package.json'],
-			python: ['requirements.txt'],
-		};
-
-		const isJavascript = files.some(file =>
-			languageIdentifiers.javascript.includes(file),
-		);
-		if (isJavascript) {
-            jsInit(setUpdates);
-        }
-
-		const isPython = files.some(file =>
-			languageIdentifiers.python.includes(file),
-		);
-
-        if (isPython) {
-            pyInit(setUpdates);
-        }
+        checkLanguage(files, setUpdates);
 
 	}, []);
 	return (
