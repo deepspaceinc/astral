@@ -1,11 +1,10 @@
-import React from 'react';
-import chalk from 'chalk';
+import path from 'node:path';
+import process from 'node:process';
 import test from 'ava';
-import {render} from 'ink-testing-library';
-import Index from './source/commands/index.js';
+import getProjectName from './source/utils/project-name.js';
 
-test('greet user', t => {
-	const {lastFrame} = render(<Index options={{name: 'Jane'}} />);
-
-	t.is(lastFrame(), `Hello, ${chalk.green('Jane')}`);
+test('returns current directory name for python projects', t => {
+	const expected = path.basename(process.cwd());
+	const actual = getProjectName('python');
+	t.is(actual, expected);
 });

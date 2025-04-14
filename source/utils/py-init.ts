@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import createPyConfig from '../constants/configs/python.js';
 import createPyDeploy from '../constants/deploys/python.js';
 import getProjectName from './project-name.js';
@@ -10,14 +10,14 @@ import getProjectName from './project-name.js';
 export default function pyInit(setUpdates: (message: string) => void) {
 	if (fs.existsSync('astral.py')) return;
 
-	const projectName = getProjectName('python');
-	const pyConfig = createPyConfig(projectName);
-	fs.writeFile('astral.py', pyConfig, err => {
-		if (err) setUpdates(`Error writing file: ${err}`);
+	const projectName: string = getProjectName('python');
+	const pyConfig: string = createPyConfig(projectName);
+	fs.writeFile('astral.py', pyConfig, error => {
+		if (error) setUpdates('Error writing file');
 		setUpdates(`astral.py created`);
 	});
-	fs.writeFile('deploy.py', createPyDeploy, err => {
-		if (err) setUpdates(`Error writing file: ${err}`);
+	fs.writeFile('deploy.py', createPyDeploy, error => {
+		if (error) setUpdates('Error writing file');
 		setUpdates(`deploy.py created`);
 	});
 }

@@ -10,6 +10,8 @@
 	"scripts": {
 		"build": "tsc",
 		"dev": "tsc --watch",
+		"lint": "prettier --check . && xo",
+		"lint:fix": "prettier --write . && xo --fix",
 		"test": "prettier --check . && xo && ava",
 		"start": "bun run source/cli.tsx"
 	},

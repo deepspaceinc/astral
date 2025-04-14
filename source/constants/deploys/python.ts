@@ -3,8 +3,7 @@
  * This is the file users need to populate with their deployment code.
  * @returns {String} A docstring containing the config object.
  */
-const createPyDeploy = 
-`"""All infrastructure definitions belong in this file.
+const createPyDeploy = `"""All infrastructure definitions belong in this file.
 See examples of common deployments here: https://tryastral.com/api/python
 """`;
 

@@ -4,8 +4,7 @@
  * @returns {String} A docstring containing the config object.
  */
 export default function createJsConfig(projectName: string) {
-	return (
-`/**
+	return `/**
  * Astral config.
  * For most projects, you will not need to change this file.
  * To make changes, see the API here: https://tryastral.com/api/javascript
@@ -14,7 +13,5 @@ export default _config({
     name: "${projectName}",
     provider: "aws", // Astral currently only supports AWS
     region: "us-east-1", // Default region
-});`
-    );
+});`;
 }
-
