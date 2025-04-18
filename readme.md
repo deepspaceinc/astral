@@ -23,3 +23,35 @@ $ astral --help
     $ astral --name=Jane
     Hello, Jane
 ```
+
+
+## TODO
+1. Compare examples with Pulumi, update the exploration
+2. Identify the first 3 components to build
+3. Share w Eric/Drew/etc.
+
+Economic Force: PaaS within cloud spending is ~211B market, with a 21% CAGR. Cloud spending is increasing at an agressive pace with no signs of slowing down.
+
+Social Force: Teams are getting smaller. Elon, Google, Facebook are all laying off teams, reducing headcount, and wanting engineering to be more 'entrepreneurial'. This forces engineers to do more with less-- they need to know how to write Python and deploy.
+Previously, these were separate jobs, but we're seeing a renaissance in 'one-man teams' where you design, build, and ship your ideas.
+
+This doesn't have a place for engineers that specifically focus on DevOps.
+
+Technological Force: Current LLM models and APIs, such as MCP from Anthropic, are allowing AI to connect to your infrastructure and give insights, with zero-coding experience.
+
+For early-stage startups
+who have small teams that aren't experienced in DevOps and need AWS,
+Deep Space is a PaaS
+
+
+
+
+
+## NOTES
+# `uname` -> Darwin (Mac) | Linux (Linux) | undefined (Windows)
+# `docker ps -a` shows either the list of images, or can't connect to daemon.
+
+
+Dependencies:
+Docker
+Fastfetch??

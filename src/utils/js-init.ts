@@ -7,17 +7,15 @@ import getProjectName from './project-name.js';
  * Creates the initial files necessary (astral.config.js, astral.deploy.js) to run Astral.
  * @param projectName - The name of the project, from either package.json or the dir name.
  */
-export default function jsInit(setUpdates: (message: string) => void): void {
+export default function jsInit(): void {
 	if (fs.existsSync('astral.config.js')) return;
 
 	const projectName: string = getProjectName('javascript');
 	const jsConfig: string = createJsConfig(projectName);
 	fs.writeFile('astral.config.js', jsConfig, error => {
-		if (error) setUpdates('Error writing file');
-		setUpdates(`astral.config.js created`);
+		if (error) console.log('Error writing file');
 	});
 	fs.writeFile('astral.deploy.js', createJsDeploy, error => {
-		if (error) setUpdates('Error writing file');
-		setUpdates(`astral.deploy.js created`);
+		if (error) console.log('Error writing file');
 	});
 }

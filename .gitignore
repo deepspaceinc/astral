@@ -1,2 +1,6 @@
 node_modules
 dist
+.astral
+exploration
+astral.config.js
+astral.deploy.js

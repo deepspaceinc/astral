@@ -13,7 +13,7 @@
 		"lint": "prettier --check . && xo",
 		"lint:fix": "prettier --write . && xo --fix",
 		"test": "prettier --check . && xo && ava",
-		"start": "bun run source/cli.tsx"
+		"start": "bun run src/cli.tsx"
 	},
 	"files": [
 		"dist"
@@ -23,6 +23,8 @@
 		"@types/ink": "^2.0.3",
 		"figlet": "^1.8.1",
 		"ink": "^4.1.0",
+		"ink-link": "^4.1.0",
+		"lucide-react": "^0.501.0",
 		"pastel": "^2.0.0",
 		"react": "^18.2.0",
 		"zod": "^3.21.4"
