@@ -39,6 +39,7 @@ export function jsInit(): void {
 			if (error) console.log('Error writing file');
 		});
 	}
+
 	if (!fs.existsSync('astral.deploy.js')) {
 		fs.writeFile('astral.deploy.js', createJsDeploy, error => {
 			if (error) console.log('Error writing file');
@@ -60,6 +61,7 @@ export function pyInit(): void {
 			if (error) console.log('Error writing file');
 		});
 	}
+
 	if (!fs.existsSync('deploy.py')) {
 		fs.writeFile('deploy.py', createPyDeploy, error => {
 			if (error) console.log('Error writing file');

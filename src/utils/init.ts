@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import process from 'node:process';
 import {initDotAstral, jsInit, pyInit} from './files.js';
 
-
 /**
  * Identifies the project name from the cwd.
  * For Javascript, it looks for package.json and uses the directory name.
@@ -24,7 +23,6 @@ export function getProjectName(lang: string): string {
 	// Fallback for JS, default for Python
 	return cwd.split('/').pop() ?? 'none';
 }
-
 
 type LanguageIdentifiers = Record<
 	string,
@@ -59,8 +57,8 @@ export const getLanguageAndInit = (files: string[]) => {
 
 export const init = () => {
 	// Non-destructive, only creates folders if they don't exist
-    initDotAstral(); 
-    // Ids the language based on the files in the current directory
+	initDotAstral();
+	// Ids the language based on the files in the current directory
 	const files = fs.readdirSync('./');
 	getLanguageAndInit(files);
 };

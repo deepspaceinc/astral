@@ -1,6 +1,5 @@
-import find from 'find-process';
 import os from 'node:os';
-
+import find from 'find-process';
 
 /**
  * Checks the users OS.
@@ -20,8 +19,8 @@ export function checkOs() {
  */
 export async function checkDocker(): Promise<boolean> {
 	try {
-		return find('name', "Docker").then(processes => processes.length > 0);
+		return await find('name', 'Docker').then(processes => processes.length > 0);
 	} catch {
-		return new Promise(() => false);
+		return false;
 	}
 }
