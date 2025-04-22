@@ -4,5 +4,5 @@ import {Text} from 'ink';
 
 export default function Masthead() {
 	const masthead = figlet.textSync('Astral', {font: 'Slant'});
-	return <Text color="green">{masthead}</Text>;
+	return <Text color="cyan">{masthead}</Text>;
 }

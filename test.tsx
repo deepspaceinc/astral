@@ -1,7 +1,7 @@
 import path from 'node:path';
 import process from 'node:process';
 import test from 'ava';
-import getProjectName from './src/utils/project-name.js';
+import {getProjectName} from './src/utils/init.js';
 
 test('returns current directory name for python projects', t => {
 	const expected = path.basename(process.cwd());

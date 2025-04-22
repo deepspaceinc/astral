@@ -24,8 +24,8 @@ $ astral --help
     Hello, Jane
 ```
 
-
 ## TODO
+
 1. Compare examples with Pulumi, update the exploration
 2. Identify the first 3 components to build
 3. Share w Eric/Drew/etc.
@@ -43,15 +43,21 @@ For early-stage startups
 who have small teams that aren't experienced in DevOps and need AWS,
 Deep Space is a PaaS
 
-
-
-
-
 ## NOTES
-# `uname` -> Darwin (Mac) | Linux (Linux) | undefined (Windows)
-# `docker ps -a` shows either the list of images, or can't connect to daemon.
 
+# `uname` -> Darwin (Mac) | Linux (Linux) | undefined (Windows)
+
+# `docker ps -a` shows either the list of images, or can't connect to daemon.
 
 Dependencies:
 Docker
 Fastfetch??
+
+`bun run build`
+`bun link`
+
+To use astral in a project, run:
+`bun link astral`
+
+Or add it in dependencies in your package.json file:
+`"astral": "link:astral"`
