@@ -1,64 +1,31 @@
-# astral
+# Astral
 
-## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+![Discord](https://img.shields.io/discord/1364346935875735706)
+[![build](https://github.com/deepspaceinc/astral/actions/workflows/build.yml/badge.svg)](https://github.com/deepspaceinc/astral/actions/workflows/build.yml)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
+## Contribute
 
-## Install
+Use `npm` or `bun`. Since we have a preference for bun, try the following:
 
 ```bash
-$ npm install --global astral
+bun install
 ```
 
-## CLI
+To develop locally:
 
-```
-$ astral --help
-
-  Usage
-    $ astral
-
-  Options
-    --name  Your name
-
-  Examples
-    $ astral --name=Jane
-    Hello, Jane
+```bash
+bun link
+bun run dev
 ```
 
-## TODO
+And in another repo to run Astral against:
 
-1. Compare examples with Pulumi, update the exploration
-2. Identify the first 3 components to build
-3. Share w Eric/Drew/etc.
-
-Economic Force: PaaS within cloud spending is ~211B market, with a 21% CAGR. Cloud spending is increasing at an agressive pace with no signs of slowing down.
-
-Social Force: Teams are getting smaller. Elon, Google, Facebook are all laying off teams, reducing headcount, and wanting engineering to be more 'entrepreneurial'. This forces engineers to do more with less-- they need to know how to write Python and deploy.
-Previously, these were separate jobs, but we're seeing a renaissance in 'one-man teams' where you design, build, and ship your ideas.
-
-This doesn't have a place for engineers that specifically focus on DevOps.
-
-Technological Force: Current LLM models and APIs, such as MCP from Anthropic, are allowing AI to connect to your infrastructure and give insights, with zero-coding experience.
-
-For early-stage startups
-who have small teams that aren't experienced in DevOps and need AWS,
-Deep Space is a PaaS
-
-## NOTES
-
-# `uname` -> Darwin (Mac) | Linux (Linux) | undefined (Windows)
-
-# `docker ps -a` shows either the list of images, or can't connect to daemon.
-
-Dependencies:
-Docker
-Fastfetch??
-
-`bun run build`
-`bun link`
-
-To use astral in a project, run:
-`bun link astral`
+```bash
+bun link astral
+```
 
 Or add it in dependencies in your package.json file:
-`"astral": "link:astral"`
+```bash
+bun link astral --save
+```
