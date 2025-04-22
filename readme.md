@@ -6,7 +6,7 @@
 
 ## Contribute
 
-Use `npm` or `bun`. Since we have a preference for bun, try the following:
+Use `npm` or `bun`:
 
 ```bash
 bun install
