@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Text } from 'ink';
-import { getDeployConstructs }  from '../utils/build.ts';
+import { getDeployConstructs }  from '../utils/build';
 
 export default function Generate() {
 	useEffect(() => {
 		const getDeployConfig = async () => {
-		await getDeployContructs();
+		await getDeployConstructs();
 		}
 		getDeployConfig().then(d => console.log(d));
 	}, [])

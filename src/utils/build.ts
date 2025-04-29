@@ -1,12 +1,20 @@
-const { readFile } = require('node:fs/promises');
-const { resolve } = require('node:path');
+const aws = {
+	ECS: opts => console.log('IN ECS: ', opts),
+};
+
+function withImports(func, imports) {
+	return function (...args) {
+		Object.keys(imports).forEach(i => {
+			global[i] = imports[i];
+		});
+
+		return func(...args);
+	};
+}
 
 export async function getDeployConstructs() {
-  try {
-    const filePath = resolve('./astral.deploy.js');
-    const contents = await readFile(filePath, { encoding: 'utf8' });
-    console.log(contents);
-  } catch (err) {
-    console.error(err.message);
-  }
+	const rootDir = process.cwd();
+	const deploy = await import(`${rootDir}/astral.deploy.js`);
+	const infra = withImports(deploy.default.infra, { aws });
+	console.log('in getDeployConstructs: ', infra());
 }
