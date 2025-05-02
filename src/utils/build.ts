@@ -1,20 +1,21 @@
-const aws = {
-	ECS: opts => console.log('IN ECS: ', opts),
-};
+import { aws } from '../constructs/aws.js';
 
-function withImports(func, imports) {
-	return function (...args) {
-		Object.keys(imports).forEach(i => {
-			global[i] = imports[i];
-		});
+function withImports(func: (...args: any[]) => void, imports: Record<string, any>) {
+	return function (...args: any[]) {
+		for (const i of Object.keys(imports)) {
+			(global as any)[i] = imports[i];
+		}
 
-		return func(...args);
+		func(...args);
 	};
 }
 
 export async function getDeployConstructs() {
 	const rootDir = process.cwd();
 	const deploy = await import(`${rootDir}/astral.deploy.js`);
-	const infra = withImports(deploy.default.infra, { aws });
-	console.log('in getDeployConstructs: ', infra());
+	return withImports(deploy.default.infra, { aws });
+}
+
+export async function generateInfra() {
+	await getDeployConstructs();
 }

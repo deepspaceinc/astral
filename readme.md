@@ -26,6 +26,7 @@ bun link astral
 ```
 
 Or add it in dependencies in your package.json file:
+
 ```bash
 bun link astral --save
 ```

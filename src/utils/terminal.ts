@@ -1,6 +1,6 @@
 import os from 'node:os';
+import { execSync } from 'node:child_process';
 import find from 'find-process';
-import { execSync } from 'child_process';
 
 /**
  * Checks the users OS.
@@ -20,28 +20,21 @@ export function checkOs() {
  */
 export async function checkDocker(): Promise<boolean> {
 	try {
-		return await find('name', 'Docker').then(processes => processes.length > 0);
+		return await find('name', 'Docker').then((processes) => processes.length > 0);
 	} catch {
 		return false;
 	}
 }
-
 
 /**
  * Checks if Pulumi is installed by checking the version number.
  * @returns {Boolean} True if Pulumi is installed and the version is valid, false otherwise.
  * @throws {Error} If Pulumi is not installed or the version is not valid.
  */
-export function checkPulumi(): boolean {
+export async function checkPulumi(): Promise<boolean> {
 	try {
-		const pulumiVersion: string = execSync('pulumi version', { encoding: 'utf-8' });
-		const validVersion = pulumiVersion.trim().includes('v3');
-		if (!validVersion) {
-			// TODO: Update the return so we can control the error message to the terminal.
-			console.error('Pulumi version is not valid. Please install Pulumi v3 or higher.');
-			return false;
-		}
-		return true;
+		const pulumiVersion: string = execSync('pulumi version', { encoding: 'utf8' });
+		return pulumiVersion.trim().includes('v3');
 	} catch {
 		return false;
 	}
@@ -52,27 +45,22 @@ export function checkPulumi(): boolean {
  * @returns {Boolean} True if Nixpacks is installed and the version is valid, false otherwise.
  * @throws {Error} If Nixpacks is not installed or the version is not valid.
  */
-export function checkNixpacks(): boolean {
+export async function checkNixpacks(): Promise<boolean> {
 	try {
-		const nixpacksVersion: string = execSync('nixpacks --version', { encoding: 'utf-8' });
-		const validVersion = nixpacksVersion.trim().includes('nixpacks 1.');
-		if (!validVersion) {
-			// TODO: Update the return so we can control the error message to the terminal.
-			console.error('Nixpacks version is not valid. Please install Nixpacks v3 or higher.');
-			return false;
-		}
-		return true;
+		const nixpacksVersion: string = execSync('nixpacks --version', { encoding: 'utf8' });
+		return nixpacksVersion.trim().includes('nixpacks 1.');
 	} catch {
 		return false;
 	}
 }
 
-
 /**
  * Checks if the user has the required dependencies installed.
- * @returns {boolean} True if all dependencies are installed, false otherwise.
+ *  NOTE: checkNixpacks and checkPulumi are not really async functions, but checkDocker is.
+ *  This is a workaround to make the function async.
+ * @returns {Promise<boolean>} True if all dependencies are installed, false otherwise.
  */
-export async function checkDependencies(): Promise<boolean> {
+export async function checkDependencies(): Promise<Array<{ name: string; isInstalled: boolean }>> {
 	const dependencies = [
 		{
 			name: 'Docker',
@@ -82,15 +70,21 @@ export async function checkDependencies(): Promise<boolean> {
 			name: 'Pulumi',
 			check: checkPulumi,
 		},
+		{
+			name: 'Nixpacks',
+			check: checkNixpacks,
+		},
 	];
+
+	const returnMessages = [];
 
 	for (const dependency of dependencies) {
 		const isInstalled = await dependency.check();
-		if (!isInstalled) {
-			console.error(`${dependency.name} is not installed or not running.`);
-			return false;
-		}
+		returnMessages.push({
+			name: dependency.name,
+			isInstalled,
+		});
 	}
 
-	return true;
+	return returnMessages;
 }

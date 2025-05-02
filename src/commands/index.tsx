@@ -1,44 +1,33 @@
-import React, {useEffect} from 'react';
-import {Text, Box} from 'ink';
-import {checkDocker} from '../utils/terminal.js';
-import {init} from '../utils/init.js';
+import React, { useEffect } from 'react';
+// Import { Text, Box } from 'ink';
+import { checkDependencies } from '../utils/terminal.js';
+import { init } from '../utils/init.js';
 import Masthead from '../components/masthead.js';
+import Status from '../components/status.js';
 
 export default function Index() {
-	const [docker, setDocker] = React.useState(false);
+	const [deps, setDeps] = React.useState<Array<{ name: string; isInstalled: boolean }>>([]);
 	// Run only once on load.
 	useEffect(() => {
-		// Attempt to initialize. Does nothing if already initialized.
+		// Attempt to initialize dirs/files. Does nothing if already initialized.
 		init();
-
-		async function isDockerRunning() {
-			const dockerIsRunning = await checkDocker();
-			if (dockerIsRunning) setDocker(true);
+		// Checks on deps/installs.
+		async function checkDeps() {
+			const deps = await checkDependencies();
+			if (deps) {
+				setDeps(deps);
+			}
 		}
 
-		isDockerRunning().catch(error => {
-			console.error('Docker check failed:', error);
+		checkDeps().catch((error) => {
+			console.error('Dependency check failed:', error);
 		});
 	}, []);
 
 	return (
 		<>
 			<Masthead />
-			<Box marginLeft={1} marginBottom={2}>
-				<Box marginRight={1}>
-					<Text color={docker ? 'green' : 'red'}>⏺</Text>
-				</Box>
-				{docker ? (
-					<Text dimColor={!docker} color="cyan">
-						Docker is running
-					</Text>
-				) : (
-					<Text dimColor={!docker} color="cyan">
-						Launch Docker or install Docker to use astral.
-						(https://docs.docker.com/get-started/get-docker/)
-					</Text>
-				)}
-			</Box>
+			<Status deps={deps} />
 		</>
 	);
 }

@@ -44,7 +44,6 @@
 		"typescript": "^5.0.3",
 		"xo": "^0.54.2"
 	},
-
 	"xo": {
 		"extends": "xo-react",
 		"prettier": true,
@@ -52,5 +51,12 @@
 			"react/prop-types": "off"
 		}
 	},
-	"prettier": "@vdemedes/prettier-config"
+	"prettier": {
+		"singleQuote": true,
+		"trailingComma": "all",
+		"bracketSpacing": true,
+		"printWidth": 100,
+		"semi": true,
+		"endOfLine": "auto"
+	}
 }

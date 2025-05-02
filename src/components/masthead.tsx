@@ -1,8 +1,8 @@
 import React from 'react';
 import figlet from 'figlet';
-import {Text} from 'ink';
+import { Text } from 'ink';
 
 export default function Masthead() {
-	const masthead = figlet.textSync('Astral', {font: 'Slant'});
+	const masthead = figlet.textSync('Astral', { font: 'Slant' });
 	return <Text color="cyan">{masthead}</Text>;
 }
