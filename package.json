@@ -13,19 +13,24 @@
 		"lint": "prettier --check . && xo",
 		"lint:fix": "prettier --write . && xo --fix",
 		"test": "ava",
-		"start": "bun run src/cli.tsx"
+		"start": "tsx src/cli.tsx"
 	},
 	"files": [
 		"dist"
 	],
 	"dependencies": {
+		"@pulumi/aws": "^6.79.1",
+		"@pulumi/awsx": "^2.21.1",
+		"@pulumi/pulumi": "^3.167.0",
 		"@types/figlet": "^1.7.0",
 		"@types/ink": "^2.0.3",
+		"enquirer": "^2.4.1",
 		"figlet": "^1.8.1",
 		"find-process": "^1.4.10",
 		"ink": "^4.1.0",
 		"lucide-react": "^0.501.0",
 		"pastel": "^2.0.0",
+		"random-word-slugs": "^0.1.7",
 		"react": "^18.2.0",
 		"zod": "^3.21.4"
 	},
@@ -41,6 +46,7 @@
 		"ink-testing-library": "^3.0.0",
 		"prettier": "^2.8.7",
 		"ts-node": "^10.9.1",
+		"tsx": "^4.19.4",
 		"typescript": "^5.0.3",
 		"xo": "^0.54.2"
 	},
