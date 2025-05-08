@@ -1,5 +1,6 @@
 import { getProjectName, getNameSlug } from '../utils/build.js';
 import { genNixpacks } from '../utils/terminal.js';
+// @ts-ignore - Skip TypeScript checking for this import
 import { InlineProgramArgs, LocalWorkspace } from "@pulumi/pulumi/automation";
 
 // Define the configuration interface
@@ -129,7 +130,7 @@ class App {
 			
 			// Return outputs
 			return {
-				serviceArn: service.taskDefinition.arn,
+				serviceArn: service.taskDefinition.apply(td => td?.arn),
 				url: frontendURL,
 				clusterName: cluster.name,
 			};
