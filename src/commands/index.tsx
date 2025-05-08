@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react';
-// Import { Text, Box } from 'ink';
 import { checkDependencies } from '../utils/terminal.js';
 import { init } from '../utils/init.js';
 import Masthead from '../components/masthead.js';
 import Status from '../components/status.js';
 
+// Work around to import enquirer and keep Astral a module in package.json
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const { Select } = require('enquirer');
+
+type Commands = [
+	'init' | 'dryrun' | 'deploy' | 'destroy'
+]
+
 export default function Index() {
 	const [deps, setDeps] = React.useState<Array<{ name: string; isInstalled: boolean }>>([]);
+	const [_, setCommand] = React.useState<Commands | null>(null);
 	// Run only once on load.
 	useEffect(() => {
 		// Attempt to initialize dirs/files. Does nothing if already initialized.
@@ -22,6 +31,16 @@ export default function Index() {
 		checkDeps().catch((error) => {
 			console.error('Dependency check failed:', error);
 		});
+		const prompt = new Select({
+			name: 'commands',
+			message: 'Commands',
+			choices: ['init', 'dryrun', 'deploy', 'destroy'],
+		});
+
+		prompt
+			.run()
+			.then((answer: Commands) => setCommand(answer))
+			.catch(console.error);
 	}, []);
 
 	return (
