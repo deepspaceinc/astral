@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import process from 'node:process';
 import createJsConfig from '../constants/configs/javascript.js';
 import createJsDeploy from '../constants/deploys/javascript.js';
 import createPyConfig from '../constants/configs/python.js';

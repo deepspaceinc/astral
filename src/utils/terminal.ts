@@ -110,7 +110,7 @@ export function genNixpacks(entrypoint: string = './app'): string {
 		const name = `${getProjectName()}-${getNameSlug()}`;
 		let project = entrypoint.replace('./', '');
 		project = `${process.cwd()}/${project}`;
-		const [major, minor, patch] = process.versions.node.split('.').map(Number)
+		const [major] = process.versions.node.split('.').map(Number);
 		process.env['NIXPACKS_NODE_VERSION'] = `${major}`;//TODO: check that we have a valid version
 		process.env['NIXPACKS_NO_CACHE'] = '1';
 		execSync(`nixpacks build ${project} --name ${name} -o ./.astral --env PORT=80,NIXPACKS_PATH=${project}`, { encoding: 'utf8' });
