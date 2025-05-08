@@ -1,6 +1,7 @@
 node_modules
 dist
 .astral
+app
 exploration
 astral.config.js
 astral.deploy.js
