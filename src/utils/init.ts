@@ -4,6 +4,7 @@ import createJsConfig from '../constants/configs/javascript.js';
 import createJsDeploy from '../constants/deploys/javascript.js';
 import createPyConfig from '../constants/configs/python.js';
 import createPyDeploy from '../constants/deploys/python.js';
+import { getProjectName } from './build.js';
 
 type Language = 'javascript' | 'python';
 type LangIds = Record<
@@ -30,28 +31,6 @@ const LANG_IDS: LangIds = {
 const FOLDERS = ['./.astral', './.astral/logs'];
 
 // Utils
-/**
- * Identifies the project name from the cwd.
- * For Javascript, it looks for package.json and uses the directory name.
- * @returns {String} The name of the project.
- */
-export function getProjectName(lang: string): string {
-	const cwd = process.cwd();
-
-	if (lang === 'javascript') {
-		const dependencyFile = `${cwd}/package.json`;
-		const data = JSON.parse(fs.readFileSync(dependencyFile, 'utf8')) as {
-			name?: string;
-		};
-		if (data?.name) {
-			return data.name;
-		}
-	}
-
-	// Fallback for JS, default for Python
-	return cwd.split('/').pop() ?? 'none';
-}
-
 export const getLanguage = (): keyof LangIds | '' => {
 	const files = fs.readdirSync('./');
 	for (const lang of Object.keys(LANG_IDS) as Array<keyof LangIds>) {
