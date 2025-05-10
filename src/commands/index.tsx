@@ -9,7 +9,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const { Select } = require('enquirer');
 
-type Commands = ['init' | 'dryrun' | 'deploy' | 'destroy'];
+type Commands = ['init' | 'deploy' | 'destroy' | 'resources'];
 
 export default function Index() {
 	const [deps, setDeps] = React.useState<Array<{ name: string; isInstalled: boolean }>>([]);

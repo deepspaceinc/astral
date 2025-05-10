@@ -20,5 +20,5 @@ export default function Generate() {
 			await astralApp.deploy();
 		});
 	}, []);
-	return <Text>generate</Text>;
+	return <Text>deploy</Text>;
 }
