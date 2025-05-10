@@ -12,7 +12,7 @@
 		"dev": "tsc --watch",
 		"lint": "prettier --check . && xo",
 		"lint:fix": "prettier --write . && xo --fix",
-		"test": "ava",
+		"test": "tsx test.ts",
 		"start": "tsx src/cli.tsx"
 	},
 	"files": [
