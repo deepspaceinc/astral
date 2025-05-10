@@ -5,13 +5,11 @@ import Masthead from '../components/masthead.js';
 import Status from '../components/status.js';
 
 // Work around to import enquirer and keep Astral a module in package.json
-import { createRequire } from "module";
+import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const { Select } = require('enquirer');
 
-type Commands = [
-	'init' | 'dryrun' | 'deploy' | 'destroy'
-]
+type Commands = ['init' | 'dryrun' | 'deploy' | 'destroy'];
 
 export default function Index() {
 	const [deps, setDeps] = React.useState<Array<{ name: string; isInstalled: boolean }>>([]);
@@ -33,7 +31,8 @@ export default function Index() {
 		});
 		const prompt = new Select({
 			name: 'commands',
-			message: 'Commands',
+			message:
+				'Astral provides simple deployment constructs for AWS.\nRun `init` first to generate the necessary configuration for your system\nand then edit your deployment file (astral.deploy.js).',
 			choices: ['init', 'dryrun', 'deploy', 'destroy'],
 		});
 
