@@ -185,18 +185,6 @@ class App {
 			throw error;
 		}
 	}
-
-	/**
-	 * Deploy to Amazon ECS (legacy method, kept for reference)
-	 */
-	// private async deployECS(): Promise<{
-	// 	serviceArn: pulumi.Output<string>;
-	// 	url: pulumi.Output<string>;
-	// 	clusterName: pulumi.Output<string>;
-	// }> {
-	// 	// This is now implemented via getPulumiProgram and deployECS
-	// 	throw new Error("Use deployECS() instead");
-	// }
 }
 
 // Export the App class as part of the astral namespace
