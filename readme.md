@@ -8,14 +8,10 @@
   <a href="https://github.com/deepspaceinc/astral/actions/workflows/build.yml"><img alt="Build status" src="https://github.com/deepspaceinc/astral/actions/workflows/build.yml/badge.svg" /></a>
 </p>
 
-
 ---
 
-![Discord](https://img.shields.io/discord/1364346935875735706)
-[![build](https://github.com/deepspaceinc/astral/actions/workflows/build.yml/badge.svg)](https://github.com/deepspaceinc/astral/actions/workflows/build.yml)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
-
 Astral provides simple AWS constructs for Javascript and Python.
+
 It uses sensible defaults to create basic deployments using ECS, Fargate, and Lambda.
 
 ## 🚀 Installation
