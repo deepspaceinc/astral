@@ -2,6 +2,13 @@
     <img alt="Astral logo" src="https://raw.githubusercontent.com/deepspaceinc/astral/refs/heads/main/static/astral_logo.svg" width="300" />
 </p>
 
+<p align="center">
+  <a href="https://sst.dev/discord"><img alt="Discord" src="https://img.shields.io/discord/1364346935875735706" /></a>
+  <a href="https://github.com/dwyl/esta/issues"><img alt="npm" src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" /></a>
+  <a href="https://github.com/deepspaceinc/astral/actions/workflows/build.yml"><img alt="Build status" src="https://github.com/deepspaceinc/astral/actions/workflows/build.yml/badge.svg" /></a>
+</p>
+
+
 ---
 
 ![Discord](https://img.shields.io/discord/1364346935875735706)
