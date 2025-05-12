@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Astral logo" src="https://github.com/deepspaceinc/astral/static/astral_logo.svg" width="300" />
+    <img alt="Astral logo" src="https://github.com/deepspaceinc/astral/blob/main/static/astral_logo.svg" width="300" />
 </p>
 
 ---
