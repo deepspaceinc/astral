@@ -1,18 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 561.97 122.54">
-  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->
-  <defs>
-    <style>
-      .st0 {
-        fill: none;
-        font-family: ITCAvantGardePro-Bold, 'ITC Avant Garde Gothic Pro';
-        font-size: 150px;
-        font-weight: 700;
-        stroke: #29abe2;
-        stroke-miterlimit: 10;
-        stroke-width: 3px;
-      }
-    </style>
-  </defs>
-  <text class="st0" transform="translate(9.52 116.45)"><tspan x="0" y="0">ASTRAL</tspan></text>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 577.46 135.21" style="enable-background:new 0 0 577.46 135.21;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#29ABE2;stroke-width:3;stroke-miterlimit:10;}
+</style>
+<g>
+	<path class="st0" d="M85.05,122.08v-16.05h-32.1l-9.75,16.05H9.15l76.2-111h28.05v111H85.05z M85.05,52.79h-0.3l-18.3,30.75h18.6
+		V52.79z"/>
+	<path class="st0" d="M167.25,124.18c-22.35,0-40.05-11.55-40.05-35.25v-3.6h28.2c0,7.2,3.3,15.15,11.55,15.15
+		c5.85,0,10.8-4.65,10.8-10.65c0-7.2-6-9.6-11.85-12.15c-3.3-1.5-6.6-2.85-9.9-4.2c-14.4-6-27.15-14.4-27.15-31.8
+		c0-20.7,19.95-32.7,38.85-32.7c10.8,0,22.95,4.05,30,12.6c5.7,7.05,7.05,13.2,7.35,21.9H177c-0.9-6.15-3-10.8-10.2-10.8
+		c-4.95,0-9.75,3.45-9.75,8.7c0,1.65,0.15,3.3,1.05,4.65c2.7,4.5,17.25,10.2,21.9,12.3c14.7,6.75,25.95,14.4,25.95,31.8
+		C205.95,113.39,189.15,124.18,167.25,124.18z"/>
+	<path class="st0" d="M261.15,35.99v86.1H232.8v-86.1h-21.9v-24.9h72v24.9H261.15z"/>
+	<path class="st0" d="M347.4,122.08l-25.65-35.85h-0.3v35.85H294.3v-111h35.1c11.7,0,24.6,0.3,34.2,7.95
+		c9.15,7.35,13.65,18.75,13.65,30.3c0,17.1-10.05,32.1-27.6,34.95l30.15,37.8H347.4z M331.8,35.99h-10.35v30.9h10.05
+		c10.65,0,18.6-4.5,18.6-15.9C350.1,40.04,341.55,35.99,331.8,35.99z"/>
+	<path class="st0" d="M452.1,122.08v-16.05H420l-9.75,16.05H376.2l76.2-111h28.05v111H452.1z M452.1,52.79h-0.3l-18.3,30.75h18.6
+		V52.79z"/>
+	<path class="st0" d="M501.3,122.08v-111h28.35v86.1h32.85v24.9H501.3z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
 </svg>
