@@ -53,18 +53,21 @@ export const checkInitDotAstral = () => {
 	return true;
 };
 
-export const checkLanguageFiles = (language: Language) => {
+export const checkLanguageFiles = (language: Language): boolean => {
 	if (language && language in LANG_IDS) {
-		LANG_IDS[language]?.check();
+		return LANG_IDS[language]?.check();
 	}
+	return false;
 };
 
-export const checkInit = () => {
+export const checkInit = (): boolean => {
+	let initIsGood = true;
 	const language = getLanguage();
-	checkInitDotAstral();
+	initIsGood = checkInitDotAstral();
 	if (language) {
-		checkLanguageFiles(language);
+		initIsGood = initIsGood && checkLanguageFiles(language);
 	}
+	return initIsGood;
 };
 
 function jsCheck(): boolean {

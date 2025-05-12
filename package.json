@@ -32,6 +32,7 @@
 		"pastel": "^2.0.0",
 		"random-word-slugs": "^0.1.7",
 		"react": "^18.2.0",
+		"yocto-spinner": "^0.2.2",
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
