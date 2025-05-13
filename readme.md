@@ -47,6 +47,7 @@ astral init
 ```
 
 This will:
+
 - Create a `.astral` directory with necessary configuration files
 - Initialize language-specific deployment files based on your project
 - Check and install dependencies if needed
@@ -68,10 +69,10 @@ The core of Astral is the `App` construct, which provides a high-level abstracti
 const { astral } = require('astral');
 
 const app = new astral.App({
-  name: 'my-awesome-app',
-  port: 3000,
-  product: 'fargate',   // 'ecs', 'fargate', 'lambda', or 'ec2'
-  region: 'us-west-2'
+	name: 'my-awesome-app',
+	port: 3000,
+	product: 'fargate', // 'ecs', 'fargate', 'lambda', or 'ec2'
+	region: 'us-west-2',
 });
 
 app.deploy();
@@ -79,31 +80,31 @@ app.deploy();
 
 P
 
-
 ## ⚙️ Configuration
 
 The `App` construct accepts the following configuration options:
 
-| Option      | Type    | Default              | Description                                      |
-|-------------|---------|----------------------|--------------------------------------------------|
-| `name`      | string  | project-name-random  | Name of your application                         |
-| `domain`    | string  | undefined            | Custom domain for your app                       |
-| `entrypoint`| string  | undefined            | Entry point file for your application           |
-| `serverless`| boolean | false                | Whether to use serverless deployment             |
-| `port`      | number  | 80                   | Port your application listens on                |
-| `region`    | string  | 'us-east-1'          | AWS region to deploy to                         |
-| `product`   | string  | 'ecs'                | AWS product: 'ecs', 'fargate', 'lambda', 'ec2'   |
-| `type`      | string  | 'web'                | Application type: 'web' or 'worker'             |
-| `image`     | string  | undefined            | Custom container image                          |
-| `cpu`       | number  | 256                  | CPU units (1024 = 1 vCPU)                       |
-| `memory`    | number  | 512                  | Memory in MB                                    |
-| `replicas`  | number  | 1                    | Number of container instances                   |
+| Option       | Type    | Default             | Description                                    |
+| ------------ | ------- | ------------------- | ---------------------------------------------- |
+| `name`       | string  | project-name-random | Name of your application                       |
+| `domain`     | string  | undefined           | Custom domain for your app                     |
+| `entrypoint` | string  | undefined           | Entry point file for your application          |
+| `serverless` | boolean | false               | Whether to use serverless deployment           |
+| `port`       | number  | 80                  | Port your application listens on               |
+| `region`     | string  | 'us-east-1'         | AWS region to deploy to                        |
+| `product`    | string  | 'ecs'               | AWS product: 'ecs', 'fargate', 'lambda', 'ec2' |
+| `type`       | string  | 'web'               | Application type: 'web' or 'worker'            |
+| `image`      | string  | undefined           | Custom container image                         |
+| `cpu`        | number  | 256                 | CPU units (1024 = 1 vCPU)                      |
+| `memory`     | number  | 512                 | Memory in MB                                   |
+| `replicas`   | number  | 1                   | Number of container instances                  |
 
 ## 🏗️ Infrastructure
 
 Astral automatically provisions the following AWS resources based on your configuration:
 
 - **For ECS/Fargate deployments**:
+
   - ECS Cluster
   - Application Load Balancer
   - ECR Repository
@@ -141,9 +142,9 @@ When working with Pulumi in Astral, you'll encounter values wrapped in `Output<T
 const url = output.url;
 
 // Correct - Use the apply method
-output.apply(value => {
-  const url = value?.url; // Safe property access with null/undefined checking
-  // Use url here
+output.apply((value) => {
+	const url = value?.url; // Safe property access with null/undefined checking
+	// Use url here
 });
 ```
 
@@ -154,17 +155,17 @@ For advanced deployments, you can create custom Pulumi programs in your `astral.
 ```javascript
 // astral.deploy.js
 module.exports = () => {
-  const { astral } = require('astral');
-  
-  const app = new astral.App({
-    name: 'custom-app',
-    // other configuration
-  });
-  
-  // You can add custom Pulumi resources here
-  // or customize the deployment process
-  
-  return app;
+	const { astral } = require('astral');
+
+	const app = new astral.App({
+		name: 'custom-app',
+		// other configuration
+	});
+
+	// You can add custom Pulumi resources here
+	// or customize the deployment process
+
+	return app;
 };
 ```
 
@@ -176,7 +177,8 @@ Astral automatically configures CloudWatch logging for your applications. You ca
 aws logs get-log-events --log-group-name "/aws/ecs/your-app-name"
 ```
 
-For more advanced monitoring, consider integrating with:  
+For more advanced monitoring, consider integrating with:
+
 - Amazon CloudWatch Metrics
 - AWS X-Ray
 - Third-party monitoring solutions
@@ -186,9 +188,11 @@ For more advanced monitoring, consider integrating with:
 ### Common Issues
 
 1. **Deployment fails with credential errors**
+
    - Ensure your AWS credentials are properly configured using `aws configure`
 
 2. **Container fails to start**
+
    - Check your application logs in CloudWatch
    - Verify your application is properly configured to listen on the specified port
 
@@ -229,14 +233,14 @@ To implement blue-green deployments with Astral:
 ```javascript
 // In astral.deploy.js
 module.exports = () => {
-  const { astral } = require('astral');
-  
-  const app = new astral.App({
-    name: `my-app-${process.env.ENVIRONMENT || 'blue'}`,
-    // other configuration
-  });
-  
-  return app;
+	const { astral } = require('astral');
+
+	const app = new astral.App({
+		name: `my-app-${process.env.ENVIRONMENT || 'blue'}`,
+		// other configuration
+	});
+
+	return app;
 };
 ```
 
@@ -247,16 +251,16 @@ For applications requiring high availability across regions:
 ```javascript
 // Deploy to multiple regions
 async function deployMultiRegion() {
-  const regions = ['us-east-1', 'us-west-2', 'eu-west-1'];
-  
-  for (const region of regions) {
-    const app = new astral.App({
-      name: 'global-app',
-      region: region
-    });
-    
-    await app.deploy();
-  }
+	const regions = ['us-east-1', 'us-west-2', 'eu-west-1'];
+
+	for (const region of regions) {
+		const app = new astral.App({
+			name: 'global-app',
+			region: region,
+		});
+
+		await app.deploy();
+	}
 }
 ```
 

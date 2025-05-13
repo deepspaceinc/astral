@@ -9,7 +9,7 @@ export default function Status({
 	const notInstalled = deps.filter((dep) => !dep.isInstalled);
 
 	return (
-		<Box marginLeft={1} marginBottom={2}>
+		<Box marginLeft={1} marginBottom={1}>
 			<Box marginRight={1}>
 				<Text color={notInstalled ? 'green' : 'red'}>⏺</Text>
 			</Box>

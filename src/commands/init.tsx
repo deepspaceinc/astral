@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
+import yoctoSpinner from 'yocto-spinner';
 import { checkDependencies } from '../utils/terminal.js';
 import { checkInit, initDotAstral, initLanguageFiles, getLanguage } from '../utils/init.js';
-import yoctoSpinner from 'yocto-spinner';
 
 /**
  * Generates files for first time users.
@@ -12,7 +12,7 @@ import yoctoSpinner from 'yocto-spinner';
 export default function Init() {
 	useEffect(() => {
 		// Check .astral files. If they don't exist, add them
-		const spinner = yoctoSpinner({text: 'checking astral install...'}).start();
+		const spinner = yoctoSpinner({ text: 'checking astral install...' }).start();
 		setTimeout(() => {
 			const hasAstralFiles = checkInit();
 			if (!hasAstralFiles) {
@@ -24,13 +24,14 @@ export default function Init() {
 					initLanguageFiles(language);
 				}
 			}
+
 			spinner.success('astral installed');
 		}, 200);
-			
+
 		// Check dependencies
 		(async function checkDeps() {
 			// Check Pulumi Installation. If not installed, install.
-			const spinner = yoctoSpinner({text: 'checking dependencies...'}).start();
+			const spinner = yoctoSpinner({ text: 'checking dependencies...' }).start();
 			setTimeout(async () => {
 				const deps = await checkDependencies();
 				const notInstalled = deps.filter((dep) => dep.isInstalled);
@@ -38,6 +39,7 @@ export default function Init() {
 					spinner.text = 'Installing dependencies...';
 					// TODO: Install dependencies
 				}
+
 				spinner.success('dependencies checked');
 			}, 200);
 		})();

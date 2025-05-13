@@ -1,11 +1,11 @@
+import { createRequire } from 'node:module';
 import React, { useEffect } from 'react';
 import { checkDependencies } from '../utils/terminal.js';
-import { init } from '../utils/init.js';
+// Import { init } from '../utils/init.js';
 import Masthead from '../components/masthead.js';
 import Status from '../components/status.js';
 
 // Work around to import enquirer and keep Astral a module in package.json
-import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const { Select } = require('enquirer');
 
@@ -13,11 +13,11 @@ type Commands = ['init' | 'deploy' | 'destroy' | 'resources'];
 
 export default function Index() {
 	const [deps, setDeps] = React.useState<Array<{ name: string; isInstalled: boolean }>>([]);
-	const [_, setCommand] = React.useState<Commands | null>(null);
+	const [_, setCommand] = React.useState<Commands | undefined>(undefined);
 	// Run only once on load.
 	useEffect(() => {
 		// Attempt to initialize dirs/files. Does nothing if already initialized.
-		init();
+		// init();
 		// Checks on deps/installs.
 		async function checkDeps() {
 			const deps = await checkDependencies();
@@ -38,7 +38,9 @@ export default function Index() {
 
 		prompt
 			.run()
-			.then((answer: Commands) => setCommand(answer))
+			.then((answer: Commands) => {
+				setCommand(answer);
+			})
 			.catch(console.error);
 	}, []);
 

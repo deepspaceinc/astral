@@ -7,10 +7,12 @@ const createJsDeploy = `/**
 * All infrastructure definitions belong in this file.
 * See examples of common deployments here: https://tryastral.com/api/javascript
 */
-export default ({
+export default {
 	async infra() {
-        // Define your infrastructure here
-    }
-});`;
+		return new astral.App({
+			entrypoint: './',
+		});
+	},
+};`;
 
 export default createJsDeploy;

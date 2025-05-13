@@ -5,8 +5,8 @@ import React, { useEffect } from 'react';
  * @returns {null}
  */
 export default function Resources() {
-    useEffect(() => {
-        console.log('List current Astral resources');
-    }, []);
-    return <>resources</>;
+	useEffect(() => {
+		console.log('List current Astral resources');
+	}, []);
+	return <>resources</>;
 }

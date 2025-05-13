@@ -57,6 +57,7 @@ export const checkLanguageFiles = (language: Language): boolean => {
 	if (language && language in LANG_IDS) {
 		return LANG_IDS[language]?.check();
 	}
+
 	return false;
 };
 
@@ -67,6 +68,7 @@ export const checkInit = (): boolean => {
 	if (language) {
 		initIsGood = initIsGood && checkLanguageFiles(language);
 	}
+
 	return initIsGood;
 };
 
