@@ -24,6 +24,7 @@
 		"@pulumi/pulumi": "^3.167.0",
 		"@types/figlet": "^1.7.0",
 		"@types/ink": "^2.0.3",
+		"cli-table": "^0.3.11",
 		"enquirer": "^2.4.1",
 		"figlet": "^1.8.1",
 		"find-process": "^1.4.10",
