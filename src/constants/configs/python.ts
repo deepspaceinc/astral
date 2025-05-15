@@ -10,6 +10,5 @@ export default function createPyConfig(projectName: string) {
     To make changes, see the API here: https://tryastral.com/api/python
     """
     name="${projectName}"
-    provider="aws"
     region="us-east-1"`;
 }

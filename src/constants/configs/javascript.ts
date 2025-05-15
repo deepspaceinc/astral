@@ -11,7 +11,6 @@ export default function createJsConfig(projectName: string) {
  */
 export default _config({
     name: "${projectName}",
-    provider: "aws", // Astral currently only supports AWS
-    region: "us-east-1", // Default region
+    region: "us-east-1",
 });`;
 }
