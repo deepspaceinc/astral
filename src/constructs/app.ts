@@ -109,9 +109,8 @@ class App {
 			// Build and publish our application's container image
 			const image = new awsx.ecr.Image(`${this.config.name}-image`, {
 				repositoryUrl: repo.url,
-				context: './app', // This might need to be configured based on your app structure
 				platform: 'linux/amd64',
-				// Dockerfile: '.astral/.nixpacks/Dockerfile',
+				dockerfile: `${this.config.entrypoint || ''}.astral/.nixpacks/Dockerfile`,
 			});
 
 			const service = new awsx.ecs.FargateService('service', {
@@ -159,7 +158,7 @@ class App {
 
 			// Create Dockerfile
 			const dockerSpinner = yoctoSpinner({ text: `creating Dockerfile...` }).start();
-			const docker = genNixpacks(this.config.entrypoint);
+			const docker = genNixpacks(this.config.entrypoint || './');
 			if (!docker) {
 				dockerSpinner.error('issue generating Dockerfile, try again');
 			}
@@ -201,9 +200,7 @@ class App {
 						onOutput: console.log,
 				  }
 				: {};
-			await stack.up({
-				onOutput: console.log,
-		  });
+			await stack.up(options_);
 			updateSpinner.success('deploy complete 🎉');
 			// My pulumi org, TODO: Need to fix this to be dynamic
 			const state = await stack.exportStack(`joelachance/${this.config.name}/${this.config.name}`);
