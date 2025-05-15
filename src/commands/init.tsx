@@ -16,7 +16,7 @@ export default function Init() {
 		setTimeout(() => {
 			const hasAstralFiles = checkInit();
 			if (!hasAstralFiles) {
-				spinner.error('astral not found, installing astral...');
+				spinner.text = 'astral not found, installing astral...';
 				initDotAstral();
 				const language = getLanguage();
 				if (language) {
