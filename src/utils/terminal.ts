@@ -1,5 +1,5 @@
 import os from 'node:os';
-import fs from 'node:fs';
+import * as fs from 'node:fs/promises';
 import { execSync } from 'node:child_process';
 import find from 'find-process';
 import { getProjectName, getNameSlug } from '../utils/build.js';
@@ -91,24 +91,34 @@ export async function checkDependencies(): Promise<Array<{ name: string; isInsta
 	return returnMessages;
 }
 
-function copyDockerfiles(project: string): void {
-	if (!fs.existsSync(`${project}/.nixpacks/`)) {
-		execSync(`mkdir -p ${project}/.nixpacks/`);
-	}
+/**
+ * Reads the file at `filePath`, replaces all occurrences of
+ * `.nixpacks/` with `.astral/.nixpacks/`, and overwrites the file.
+ * @returns {Promise<boolean>} True if the file was successfully updated, false otherwise.
+ */
+async function updateNixpacksDockerfile(): Promise<boolean> {
+  try {
+	const filePath = `${process.cwd()}/.astral/.nixpacks/Dockerfile`;
+    const content = await fs.readFile(filePath, 'utf8');
 
-	execSync(`cp ./.astral/.nixpacks/Dockerfile ${project}/`);
-	execSync(`cp ./.astral/.nixpacks/* ${project}/.nixpacks/`);
+    const updated = content.replace(/\.nixpacks\//g, '.astral/.nixpacks/');
+    await fs.writeFile(filePath, updated, 'utf8');
+	return true;
+  } catch (err) {
+	return false;
+  }
 }
 
 /**
- * Run Nixpacks. Generate a Dockerfile in the .astral dir
- * @returns {String} Project name if Nixpacks was successful.
+ * Generates Nixpacks, which generates a Dockerfile in the .astral/.nixpacks directory
+ * @returns {Promise<string>} Project name if Nixpacks was successful.
  */
-export function genNixpacks(entrypoint = './app'): string {
+export async function genNixpacks(entrypoint: string): Promise<string> {
 	try {
 		const name = `${getProjectName()}-${getNameSlug()}`;
-		let project = entrypoint.replace('./', '');
-		project = `${process.cwd()}/${project}`;
+		let project = entrypoint == './' ? '' : entrypoint.replace('./', '/');
+		console.log(project)
+		project = `${process.cwd()}${project}`;
 		const [major] = process.versions.node.split('.').map(Number);
 		process.env['NIXPACKS_NODE_VERSION'] = `${major}`; // TODO: check that we have a valid version
 		process.env['NIXPACKS_NO_CACHE'] = '1';
@@ -116,7 +126,7 @@ export function genNixpacks(entrypoint = './app'): string {
 			`nixpacks build . --name ${name} -o ./.astral --env PORT=80,NIXPACKS_PATH=${project}`,
 			{ encoding: 'utf8' },
 		);
-		copyDockerfiles(project);
+		await updateNixpacksDockerfile();
 		return name;
 	} catch {
 		return '';
