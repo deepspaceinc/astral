@@ -28,11 +28,13 @@
 		"enquirer": "^2.4.1",
 		"figlet": "^1.8.1",
 		"find-process": "^1.4.10",
+		"fullscreen-ink": "^0.0.2",
 		"ink": "^4.1.0",
 		"lucide-react": "^0.501.0",
 		"pastel": "^2.0.0",
 		"random-word-slugs": "^0.1.7",
 		"react": "^18.2.0",
+		"react-devtools-core": "^4.28.5",
 		"yocto-spinner": "^0.2.2",
 		"zod": "^3.21.4"
 	},
