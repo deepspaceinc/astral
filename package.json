@@ -36,7 +36,7 @@
 		"random-word-slugs": "^0.1.7",
 		"react": "^18.2.0",
 		"react-devtools-core": "^4.28.5",
-		"yocto-spinner": "^0.2.2",
+		"terminal-link": "^4.0.0",
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
