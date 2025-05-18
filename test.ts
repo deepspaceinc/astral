@@ -3,7 +3,7 @@
 
 // Simple standalone test without using ava
 import * as os from 'node:os';
-import { checkOs } from './src/utils/terminal.js';
+import { checkOs } from './src/utils/dependencies.js';
 
 // Basic testing function
 function assertEqual(actual: any, expected: any, message: string) {
