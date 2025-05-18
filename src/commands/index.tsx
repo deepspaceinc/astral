@@ -1,53 +1,136 @@
-import { createRequire } from 'node:module';
 import React, { useEffect } from 'react';
-import { checkDependencies } from '../utils/terminal.js';
-// Import { init } from '../utils/init.js';
+import { Text, Box, useApp, useInput } from 'ink';
+import { withFullScreen } from 'fullscreen-ink';
+import { checkInit } from '../utils/init.js';
 import Masthead from '../components/masthead.js';
 import Status from '../components/status.js';
+import { checkDependencies } from '../utils/dependencies.js';
+import { Select } from '@inkjs/ui';
+import Init from '../commands/init.js';
+import Deploy from '../commands/deploy.js';
+import zod from 'zod';
 
-// Work around to import enquirer and keep Astral a module in package.json
-const require = createRequire(import.meta.url);
-const { Select } = require('enquirer');
+const options = zod.object({
+	verbose: zod.boolean().optional().describe('Verbose logging'),
+	dryrun: zod.boolean().optional().describe('Dry run'),
+});
 
-type Commands = ['init' | 'deploy' | 'destroy' | 'resources'];
+export type Props = {
+	readonly options: zod.infer<typeof options>;
+};
 
-export default function Index() {
+function IndexComponent({ options }: Props) {
 	const [deps, setDeps] = React.useState<Array<{ name: string; isInstalled: boolean }>>([]);
-	const [_, setCommand] = React.useState<Commands | undefined>(undefined);
+	const [files, setFiles] = React.useState<boolean>(false);
+	const [renderApp, setRenderApp] = React.useState<boolean>(false);
+	const [runInit, setRunInit] = React.useState<boolean>(false);
+	const [runDeploy, setRunDeploy] = React.useState<boolean>(false);
+
+	// EXIT THE APP
+	const { exit } = useApp();
+	useInput((input, key) => {
+		if (input === 'q' || key.escape) {
+			exit();
+		}
+	});
+
 	// Run only once on load.
 	useEffect(() => {
-		// Attempt to initialize dirs/files. Does nothing if already initialized.
-		// init();
 		// Checks on deps/installs.
-		async function checkDeps() {
-			const deps = await checkDependencies();
-			if (deps) {
-				setDeps(deps);
-			}
-		}
-
-		checkDeps().catch((error) => {
+		(async () => {
+			setDeps(await checkDependencies());
+			setFiles(checkInit());
+		})().catch((error) => {
 			console.error('Dependency check failed:', error);
 		});
-		const prompt = new Select({
-			name: 'commands',
-			message:
-				'Astral provides simple deployment constructs for AWS.\nRun `init` first to generate the necessary configuration for your system\nand then edit your deployment file (astral.deploy.js).',
-			choices: ['init', 'dryrun', 'deploy', 'destroy'],
-		});
 
-		prompt
-			.run()
-			.then((answer: Commands) => {
-				setCommand(answer);
-			})
-			.catch(console.error);
+		// Show the app after the logo screen displays for a 2sec
+		setTimeout(() => setRenderApp(true), 100);
 	}, []);
 
 	return (
 		<>
-			<Masthead />
-			<Status deps={deps} />
+			{renderApp ? (
+				<Box flexDirection="column" gap={1} height="100%" width="100%">
+					<Status deps={deps} files={files} />
+					<Box height="100%" width="100%" flexDirection="column">
+						<Box height="20%">
+							<Select
+								options={[
+									{
+										label: 'init',
+										value: 'init',
+									},
+									{
+										label: 'deploy',
+										value: 'deploy',
+									},
+								]}
+								onChange={(action) => {
+									if (action === 'init') {
+										setRunInit(true);
+										setRunDeploy(false);
+									}
+									if (action === 'deploy') {
+										setRunDeploy(true);
+										setRunInit(false);
+									}
+								}}
+							/>
+						</Box>
+						{runInit && !runDeploy && (
+							<Box
+								borderStyle="round"
+								borderColor="cyan"
+								borderDimColor
+								flexDirection="column"
+								height="80%"
+								width="100%"
+								paddingBottom={1}
+								overflow="hidden"
+							>
+								<Init />
+							</Box>
+						)}
+						{runDeploy && !runInit && (
+							<Box
+								borderStyle="round"
+								borderColor="cyan"
+								borderDimColor
+								flexDirection="column"
+								height="80%"
+								width="100%"
+								paddingBottom={1}
+								overflow="hidden"
+							>
+								<Deploy options={options} />
+							</Box>
+						)}
+						{!runInit && !runDeploy && (
+							// Placeholder for the height so elements dont shift around
+							<Box height="80%" width="100%"></Box>
+						)}
+					</Box>
+					{/* Footer */}
+					<Box borderStyle="round" borderColor="cyan" borderDimColor paddingBottom={1}>
+						<Text dimColor color="cyan">
+							{'quit: q or <esc>'}
+						</Text>
+					</Box>
+				</Box>
+			) : (
+				<Masthead />
+			)}
 		</>
 	);
+}
+
+// Component wrapper for full screen.
+export default function Index({ options }: Props) {
+	useEffect(() => {
+		const renderApp = async () =>
+			await withFullScreen(<IndexComponent options={options} />).start();
+		renderApp();
+	}, []);
+	return null;
 }
