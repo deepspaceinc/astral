@@ -10,9 +10,39 @@
 
 ---
 
-Astral provides simple AWS constructs for Javascript and Python.
+Astral provides simple AWS constructs for JavaScript and Python.
 
 It uses sensible defaults to create basic deployments using ECS, Fargate, and Lambda.
+
+## 🗂️ Repository Overview
+
+Astral is an AWS deployment CLI built with TypeScript. The CLI entry point `src/cli.tsx` starts a Pastel-based app:
+
+```ts
+#!/usr/bin/env node
+import Pastel from 'pastel';
+
+const app = new Pastel({
+        importMeta: import.meta,
+});
+
+await app.run();
+```
+
+### Directory Structure
+
+```
+src/
+├── cli.tsx             # Entry point
+├── commands/           # CLI commands (init, deploy, etc.)
+├── components/         # Ink UI components
+├── constants/          # Templates for config/deploy files
+├── constructs/         # Infrastructure constructs (App class)
+└── utils/              # Helper utilities
+```
+
+The `App` construct in `src/constructs/app.ts` merges defaults with user settings and deploys through Pulumi's automation API. Utilities in `src/utils/` handle tasks like dependency checks, project initialization, and container builds.
+
 
 ## 🚀 Installation
 
@@ -78,7 +108,6 @@ const app = new astral.App({
 app.deploy();
 ```
 
-P
 
 ## ⚙️ Configuration
 
@@ -122,7 +151,6 @@ Astral automatically provisions the following AWS resources based on your config
 ```
 astral init      # Initialize Astral in your project
 astral deploy    # Deploy your application
-astral resources # List deployed resources
 ```
 
 ## 🌐 Environment Variables
@@ -197,7 +225,6 @@ For more advanced monitoring, consider integrating with:
    - Verify your application is properly configured to listen on the specified port
 
 3. **Resources don't appear**
-   - Run `astral resources` to view deployed resources
    - Check your AWS console in the configured region
 
 ### Debugging
@@ -276,6 +303,7 @@ async function deployMultiRegion() {
 - [Astral Documentation](https://github.com/deepspaceinc/astral/wiki) - Full API reference
 - [Pulumi Documentation](https://www.pulumi.com/docs/) - Learn more about Pulumi
 - [AWS Best Practices](https://aws.amazon.com/architecture/well-architected/) - AWS Well-Architected Framework
+- Explore `src/constructs/app.ts` and the utilities in `src/utils/` to see how deployments are orchestrated and dependencies are managed.
 
 ## 👤 Contributing
 
