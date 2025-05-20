@@ -13,5 +13,5 @@
 		"esm": true,
 		"experimentalSpecifierResolution": "node"
 	},
-	"include": ["src", "test.tsx", "test.tjs"]
+        "include": ["src", "test.ts", "test.tsx", "test.tjs"]
 }
