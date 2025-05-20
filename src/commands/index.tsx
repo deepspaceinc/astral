@@ -107,7 +107,7 @@ function IndexComponent({ options }: Props) {
 							</Box>
 						)}
 						{!runInit && !runDeploy && (
-							// Placeholder for the height so elements dont shift around
+							// Placeholder for the height so elements don’t shift around.
 							<Box height="80%" width="100%"></Box>
 						)}
 					</Box>
