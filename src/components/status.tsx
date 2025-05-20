@@ -9,7 +9,8 @@ export default function Status({
 	readonly deps: Array<{ name: string; isInstalled: boolean }>;
 	readonly files: boolean;
 }) {
-	const notInstalled = deps.filter((dep) => !dep.isInstalled);
+	// Determine whether every dependency is installed
+	const allInstalled = deps.every((dep) => dep.isInstalled);
 
 	return (
 		<Box flexDirection="column" gap={1}>
@@ -23,14 +24,14 @@ export default function Status({
 			</Transform>
 			<Box marginLeft={1}>
 				<Box marginRight={1}>
-					<Text color={notInstalled ? 'green' : 'red'}>⏺</Text>
+					<Text color={allInstalled ? 'green' : 'red'}>⏺</Text>
 				</Box>
-				{notInstalled ? (
-					<Text dimColor={!notInstalled} color="cyan">
+				{allInstalled ? (
+					<Text dimColor={!allInstalled} color="cyan">
 						Dependencies are installed & running.
 					</Text>
 				) : (
-					<Text dimColor={!notInstalled} color="cyan">
+					<Text dimColor={!allInstalled} color="cyan">
 						Run `astral init` to use astral.
 					</Text>
 				)}
