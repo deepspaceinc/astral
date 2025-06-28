@@ -2,13 +2,15 @@
 	"name": "astral",
 	"version": "0.0.0",
 	"license": "MIT",
-	"bin": "dist/cli.js",
+	"bin": {
+		"astral": "dist/src/cli.js"
+	},
 	"type": "module",
 	"engines": {
 		"node": ">=16"
 	},
 	"scripts": {
-		"build": "tsc",
+		"build": "tsc && chmod +x dist/src/cli.js",
 		"dev": "tsc --watch",
 		"lint": "prettier --check . && xo",
 		"lint:fix": "prettier --write . && xo --fix",

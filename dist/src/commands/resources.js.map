@@ -1,0 +1,1 @@
+{"version":3,"file":"resources.js","sourceRoot":"","sources":["../../../src/commands/resources.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAE,SAAS,EAAE,MAAM,OAAO,CAAC;AAEzC;;;GAGG;AACH,MAAM,CAAC,OAAO,UAAU,SAAS;IAChC,SAAS,CAAC,GAAG,EAAE;QACd,OAAO,CAAC,GAAG,CAAC,+BAA+B,CAAC,CAAC;IAC9C,CAAC,EAAE,EAAE,CAAC,CAAC;IACP,OAAO,sDAAc,CAAC;AACvB,CAAC"}
